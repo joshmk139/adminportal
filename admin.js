@@ -89,51 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Product Modal
-    const addProductBtn = document.getElementById('addProductBtn');
-    const productModal = document.getElementById('productModal');
-    const closeProductModal = document.getElementById('closeModal');
-    const cancelProductBtn = document.getElementById('cancelBtn');
-    const saveProductBtn = document.getElementById('saveProductBtn');
-    
-    if (addProductBtn) {
-        addProductBtn.addEventListener('click', function() {
-            const modalTitle = document.getElementById('modalTitle');
-            if (modalTitle) modalTitle.textContent = 'Add New Product';
-            openModal('productModal');
-        });
-    }
-    
-    if (closeProductModal) {
-        closeProductModal.addEventListener('click', function() {
-            closeModal('productModal');
-        });
-    }
-    
-    if (cancelProductBtn) {
-        cancelProductBtn.addEventListener('click', function() {
-            closeModal('productModal');
-        });
-    }
-    
-    if (saveProductBtn) {
-        saveProductBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Here you would normally save the product via API
-            alert('Product saved successfully! (This is a UI demo)');
-            closeModal('productModal');
-        });
-    }
-    
-    // Edit Product Buttons
-    const editProductBtns = document.querySelectorAll('.edit-btn');
-    editProductBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const modalTitle = document.getElementById('modalTitle');
-            if (modalTitle) modalTitle.textContent = 'Edit Product';
-            openModal('productModal');
-        });
-    });
+    // Product Modal handlers are now managed by products.js
+    // Removed demo handlers to allow products.js to handle database operations
     
     // Order Modal
     const viewOrderBtns = document.querySelectorAll('.view-btn');
@@ -188,13 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    if (updateStockBtn) {
-        updateStockBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Stock updated successfully! (This is a UI demo)');
-            closeModal('stockModal');
-        });
-    }
+    // Stock update handler is now managed by inventory.js
+    // Removed demo handler to allow proper database operations
     
     // Settings Tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -217,23 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Save Settings
-    const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-    if (saveSettingsBtn) {
-        saveSettingsBtn.addEventListener('click', function() {
-            alert('Settings saved successfully! (This is a UI demo)');
-        });
-    }
-    
-    // Form Validation
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Form validation would go here
-            alert('Form submitted! (This is a UI demo)');
-        });
-    });
+    // Settings and form handlers are now managed by their respective JS files:
+    // - site-settings.js handles settings save
+    // - products.js handles product form submission
+    // Removed demo handlers to allow proper database operations
     
     // Image Preview
     const fileInputs = document.querySelectorAll('input[type="file"]');
@@ -278,19 +217,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Delete Confirmation
-    const deleteBtns = document.querySelectorAll('.delete-btn');
-    deleteBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
-                // In a real app, this would delete the item via API
-                alert('Item deleted! (This is a UI demo)');
-                // Optionally remove the row from the table
-                // this.closest('tr').remove();
-            }
-        });
-    });
+    // Delete buttons are now handled by their respective page JS files:
+    // - products.js handles product deletion
+    // - orders.js handles order actions
+    // Removed demo handler to allow proper database operations
     
     // Search Functionality (Basic)
     const searchInputs = document.querySelectorAll('.search-box input');
@@ -521,20 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Save settings handler - also saves main site URL
-    if (saveSettingsBtn) {
-        const originalSaveHandler = saveSettingsBtn.onclick;
-        saveSettingsBtn.addEventListener('click', function() {
-            if (mainSiteUrlInput && mainSiteUrlInput.value) {
-                setMainSiteUrl(mainSiteUrlInput.value);
-            }
-            if (originalSaveHandler) {
-                originalSaveHandler();
-            } else {
-                alert('Settings saved successfully! (This is a UI demo)');
-            }
-        });
-    }
+    // Settings save handler is now managed by site-settings.js
+    // Removed demo handler to allow proper database operations
+    // Main site URL is saved via change/blur handlers above and by site-settings.js
     
     // Load and update orders badge from localStorage
     updateOrdersBadgeFromStorage();

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Products Management | All things girlie Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="IMG_2357.PNG" alt="All things girlie">
+                <span class="logo-text">Admin Portal</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="products.html" class="nav-item active">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Orders</span>
+                <span class="badge">12</span>
+            </a>
+            <a href="customers.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <i class="fas fa-warehouse"></i>
+                <span>Inventory</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Ekpo Glory Mkpanam</span>
+                    <span class="user-role">CEO</span>
+                </div>
+            </div>
+            <a href="#" id="mainSiteLink" class="main-site-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Visit Main Site</span>
+            </a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Products</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search products...">
+                </div>
+                <button class="btn btn-primary" id="addProductBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Product</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Lip Oil</option>
+                        <option>Lipstick</option>
+                        <option>Lip Balm</option>
+                        <option>Lip Scrub</option>
+                        <option>Lip Mask</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select class="filter-select">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Out of Stock</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select class="filter-select">
+                        <option>Newest First</option>
+                        <option>Oldest First</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Name: A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="table-card">
+                <div class="table-scroll">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="select-all">
+                            </th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Sales</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0537.JPG" alt="Nourishing Lip Oil" class="product-img">
+                                    <div>
+                                        <strong>Nourishing Lip Oil</strong>
+                                        <span class="product-id">ID: nourishing-lip-oil</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lip Oil</td>
+                            <td>$28.00</td>
+                            <td>
+                                <span class="stock-badge stock-high">45 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>38</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0538.JPG" alt="Satin Lipstick" class="product-img">
+                                    <div>
+                                        <strong>Satin Lipstick</strong>
+                                        <span class="product-id">ID: satin-lipstick</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lipstick</td>
+                            <td>$32.00</td>
+                            <td>
+                                <span class="stock-badge stock-high">52 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>45</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0539.JPG" alt="Hydrating Lip Balm" class="product-img">
+                                    <div>
+                                        <strong>Hydrating Lip Balm</strong>
+                                        <span class="product-id">ID: hydrating-lip-balm</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lip Balm</td>
+                            <td>$18.00</td>
+                            <td>
+                                <span class="stock-badge stock-medium">28 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>28</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0540.JPG" alt="Matte Lipstick" class="product-img">
+                                    <div>
+                                        <strong>Matte Lipstick</strong>
+                                        <span class="product-id">ID: matte-lipstick</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lipstick</td>
+                            <td>$30.00</td>
+                            <td>
+                                <span class="stock-badge stock-high">38 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>32</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0541.JPG" alt="Glossy Tint" class="product-img">
+                                    <div>
+                                        <strong>Glossy Tint</strong>
+                                        <span class="product-id">ID: glossy-tint</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lip Tint</td>
+                            <td>$22.00</td>
+                            <td>
+                                <span class="stock-badge stock-low">12 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>18</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0542.JPG" alt="Sugar Lip Scrub" class="product-img">
+                                    <div>
+                                        <strong>Sugar Lip Scrub</strong>
+                                        <span class="product-id">ID: sugar-lip-scrub</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lip Scrub</td>
+                            <td>$16.00</td>
+                            <td>
+                                <span class="stock-badge stock-out">0 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-inactive">Out of Stock</span>
+                            </td>
+                            <td>15</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="IMG_0543.JPG" alt="Overnight Lip Mask" class="product-img">
+                                    <div>
+                                        <strong>Overnight Lip Mask</strong>
+                                        <span class="product-id">ID: overnight-lip-mask</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Lip Mask</td>
+                            <td>$26.00</td>
+                            <td>
+                                <span class="stock-badge stock-high">42 units</span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">Active</span>
+                            </td>
+                            <td>22</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Product</h2>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="product-form" id="productForm">
+                    <div class="form-group">
+                        <label>Product Name *</label>
+                        <input type="text" id="productName" class="form-control" placeholder="Enter product name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Price (USD) *</label>
+                            <input type="number" id="productPrice" step="0.01" class="form-control" placeholder="0.00" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="productCategory" class="form-control" required>
+                                <option value="">Select category</option>
+                                <option>Lip Oil</option>
+                                <option>Lipstick</option>
+                                <option>Lip Balm</option>
+                                <option>Lip Tint</option>
+                                <option>Lip Scrub</option>
+                                <option>Lip Mask</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea id="productDescription" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Stock Quantity *</label>
+                            <input type="number" id="productStock" class="form-control" placeholder="0" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Status *</label>
+                            <select id="productStatus" class="form-control" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div class="image-upload">
+                            <img src="" alt="Product Preview" class="preview-image" style="display: none;">
+                            <input type="file" id="productImage" accept="image/*" class="file-input">
+                            <label for="productImage" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Click to upload or drag and drop</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveProductBtn">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+    <script src="products.js"></script>
+</body>
+</html>
+

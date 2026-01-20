@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Orders Management | All things girlie Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="IMG_2357.PNG" alt="All things girlie">
+                <span class="logo-text">Admin Portal</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </a>
+            <a href="orders.html" class="nav-item active">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Orders</span>
+                <span class="badge">12</span>
+            </a>
+            <a href="customers.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <i class="fas fa-warehouse"></i>
+                <span>Inventory</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Ekpo Glory Mkpanam</span>
+                    <span class="user-role">CEO</span>
+                </div>
+            </div>
+            <a href="#" id="mainSiteLink" class="main-site-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Visit Main Site</span>
+            </a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Orders</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search orders...">
+                </div>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-download"></i>
+                    <span>Export</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Order Stats -->
+            <div class="stats-grid">
+                <div class="stat-card small">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #E8B4A8, #D4A574);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">8</h3>
+                        <p class="stat-label">Pending</p>
+                    </div>
+                </div>
+                <div class="stat-card small">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #F4D4C4, #E8B4A8);">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">15</h3>
+                        <p class="stat-label">Processing</p>
+                    </div>
+                </div>
+                <div class="stat-card small">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #C49A8A, #B88A7A);">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">23</h3>
+                        <p class="stat-label">Shipped</p>
+                    </div>
+                </div>
+                <div class="stat-card small">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #D4A574, #C49A8A);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">110</h3>
+                        <p class="stat-label">Delivered</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select class="filter-select">
+                        <option>All Orders</option>
+                        <option>Pending</option>
+                        <option>Processing</option>
+                        <option>Shipped</option>
+                        <option>Delivered</option>
+                        <option>Cancelled</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Date Range:</label>
+                    <select class="filter-select">
+                        <option>All Time</option>
+                        <option>Today</option>
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                        <option>Last 3 months</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select class="filter-select">
+                        <option>Newest First</option>
+                        <option>Oldest First</option>
+                        <option>Amount: High to Low</option>
+                        <option>Amount: Low to High</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-card">
+                <div class="table-scroll">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>#ORD-2024-001</strong>
+                            </td>
+                            <td>
+                                <div class="customer-cell">
+                                    <div class="customer-avatar">SJ</div>
+                                    <div>
+                                        <strong>Sarah Johnson</strong>
+                                        <span class="customer-email">sarah.j@email.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="items-count">2 items</span>
+                            </td>
+                            <td>
+                                <strong>$64.00</strong>
+                            </td>
+                            <td>Jan 15, 2024</td>
+                            <td>
+                                <select class="status-select status-pending">
+                                    <option>Pending</option>
+                                    <option>Processing</option>
+                                    <option>Shipped</option>
+                                    <option>Delivered</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#ORD-2024-002</strong>
+                            </td>
+                            <td>
+                                <div class="customer-cell">
+                                    <div class="customer-avatar">ED</div>
+                                    <div>
+                                        <strong>Emily Davis</strong>
+                                        <span class="customer-email">emily.d@email.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="items-count">1 item</span>
+                            </td>
+                            <td>
+                                <strong>$28.00</strong>
+                            </td>
+                            <td>Jan 14, 2024</td>
+                            <td>
+                                <select class="status-select status-processing">
+                                    <option>Pending</option>
+                                    <option selected>Processing</option>
+                                    <option>Shipped</option>
+                                    <option>Delivered</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#ORD-2024-003</strong>
+                            </td>
+                            <td>
+                                <div class="customer-cell">
+                                    <div class="customer-avatar">JM</div>
+                                    <div>
+                                        <strong>Jessica Martinez</strong>
+                                        <span class="customer-email">jessica.m@email.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="items-count">3 items</span>
+                            </td>
+                            <td>
+                                <strong>$90.00</strong>
+                            </td>
+                            <td>Jan 13, 2024</td>
+                            <td>
+                                <select class="status-select status-shipped">
+                                    <option>Pending</option>
+                                    <option>Processing</option>
+                                    <option selected>Shipped</option>
+                                    <option>Delivered</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#ORD-2024-004</strong>
+                            </td>
+                            <td>
+                                <div class="customer-cell">
+                                    <div class="customer-avatar">AW</div>
+                                    <div>
+                                        <strong>Amanda Wilson</strong>
+                                        <span class="customer-email">amanda.w@email.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="items-count">2 items</span>
+                            </td>
+                            <td>
+                                <strong>$46.00</strong>
+                            </td>
+                            <td>Jan 12, 2024</td>
+                            <td>
+                                <select class="status-select status-delivered">
+                                    <option>Pending</option>
+                                    <option>Processing</option>
+                                    <option>Shipped</option>
+                                    <option selected>Delivered</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#ORD-2024-005</strong>
+                            </td>
+                            <td>
+                                <div class="customer-cell">
+                                    <div class="customer-avatar">MB</div>
+                                    <div>
+                                        <strong>Michelle Brown</strong>
+                                        <span class="customer-email">michelle.b@email.com</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="items-count">4 items</span>
+                            </td>
+                            <td>
+                                <strong>$118.00</strong>
+                            </td>
+                            <td>Jan 11, 2024</td>
+                            <td>
+                                <select class="status-select status-delivered">
+                                    <option>Pending</option>
+                                    <option>Processing</option>
+                                    <option>Shipped</option>
+                                    <option selected>Delivered</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Order Details - #ORD-2024-001</h2>
+                <button class="modal-close" id="closeOrderModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="order-details-grid">
+                    <div class="order-section">
+                        <h3>Customer Information</h3>
+                        <div class="info-group">
+                            <label>Name:</label>
+                            <span>Sarah Johnson</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Email:</label>
+                            <span>sarah.j@email.com</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone:</label>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                    </div>
+                    <div class="order-section">
+                        <h3>Shipping Address</h3>
+                        <p>123 Main Street<br>New York, NY 10001<br>United States</p>
+                    </div>
+                    <div class="order-section">
+                        <h3>Order Summary</h3>
+                        <div class="order-items">
+                            <div class="order-item-detail">
+                                <img src="IMG_0538.JPG" alt="Satin Lipstick" class="item-img">
+                                <div class="item-info">
+                                    <strong>Satin Lipstick</strong>
+                                    <span>Qty: 2 × $32.00</span>
+                                </div>
+                                <span class="item-total">$64.00</span>
+                            </div>
+                        </div>
+                        <div class="order-totals">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span>$64.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Shipping:</span>
+                                <span>$5.00</span>
+                            </div>
+                            <div class="total-row total-final">
+                                <span>Total:</span>
+                                <span>$69.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelOrderBtn">Close</button>
+                <button class="btn btn-primary" id="updateOrderBtn">Update Status</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+    <script src="orders.js"></script>
+</body>
+</html>
+

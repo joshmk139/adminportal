@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Admin Dashboard | All things girlie</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="IMG_2357.PNG" alt="All things girlie">
+                <span class="logo-text">Admin Portal</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Orders</span>
+                <span class="badge">12</span>
+            </a>
+            <a href="customers.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <i class="fas fa-warehouse"></i>
+                <span>Inventory</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Ekpo Glory Mkpanam</span>
+                    <span class="user-role">CEO</span>
+                </div>
+            </div>
+            <a href="#" id="mainSiteLink" class="main-site-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Visit Main Site</span>
+            </a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content-wrapper">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #E8B4A8, #D4A574);">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">$12,450</h3>
+                        <p class="stat-label">Total Revenue</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12.5%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #F4D4C4, #E8B4A8);">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">156</h3>
+                        <p class="stat-label">Total Orders</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8.2%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #C49A8A, #B88A7A);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">342</h3>
+                        <p class="stat-label">Customers</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 5.1%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #D4A574, #C49A8A);">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value">7</h3>
+                        <p class="stat-label">Products</p>
+                        <span class="stat-change neutral">
+                            <i class="fas fa-minus"></i> 0%
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Tables Row -->
+            <div class="dashboard-grid">
+                <!-- Revenue Chart -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Revenue Overview</h2>
+                        <select class="period-select">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                            <option>Last year</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height: 60%"></div>
+                                <div class="chart-bar" style="height: 80%"></div>
+                                <div class="chart-bar" style="height: 45%"></div>
+                                <div class="chart-bar" style="height: 90%"></div>
+                                <div class="chart-bar" style="height: 70%"></div>
+                                <div class="chart-bar" style="height: 85%"></div>
+                                <div class="chart-bar" style="height: 75%"></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recent Orders</h2>
+                        <a href="orders.html" class="view-all-link">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="orders-list">
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <span class="order-id">#ORD-2024-001</span>
+                                    <span class="order-customer">Sarah Johnson</span>
+                                </div>
+                                <div class="order-details">
+                                    <span class="order-amount">$64.00</span>
+                                    <span class="order-status status-pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <span class="order-id">#ORD-2024-002</span>
+                                    <span class="order-customer">Emily Davis</span>
+                                </div>
+                                <div class="order-details">
+                                    <span class="order-amount">$28.00</span>
+                                    <span class="order-status status-processing">Processing</span>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <span class="order-id">#ORD-2024-003</span>
+                                    <span class="order-customer">Jessica Martinez</span>
+                                </div>
+                                <div class="order-details">
+                                    <span class="order-amount">$90.00</span>
+                                    <span class="order-status status-shipped">Shipped</span>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <span class="order-id">#ORD-2024-004</span>
+                                    <span class="order-customer">Amanda Wilson</span>
+                                </div>
+                                <div class="order-details">
+                                    <span class="order-amount">$46.00</span>
+                                    <span class="order-status status-delivered">Delivered</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products and Activity Row -->
+            <div class="dashboard-grid">
+                <!-- Top Products -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Top Products</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="products-list">
+                            <div class="product-item">
+                                <img src="IMG_0538.JPG" alt="Satin Lipstick" class="product-thumb">
+                                <div class="product-info">
+                                    <h4>Satin Lipstick</h4>
+                                    <p>45 sales</p>
+                                </div>
+                                <span class="product-revenue">$1,440</span>
+                            </div>
+                            <div class="product-item">
+                                <img src="IMG_0537.JPG" alt="Nourishing Lip Oil" class="product-thumb">
+                                <div class="product-info">
+                                    <h4>Nourishing Lip Oil</h4>
+                                    <p>38 sales</p>
+                                </div>
+                                <span class="product-revenue">$1,064</span>
+                            </div>
+                            <div class="product-item">
+                                <img src="IMG_0540.JPG" alt="Matte Lipstick" class="product-thumb">
+                                <div class="product-info">
+                                    <h4>Matte Lipstick</h4>
+                                    <p>32 sales</p>
+                                </div>
+                                <span class="product-revenue">$960</span>
+                            </div>
+                            <div class="product-item">
+                                <img src="IMG_0539.JPG" alt="Hydrating Lip Balm" class="product-thumb">
+                                <div class="product-info">
+                                    <h4>Hydrating Lip Balm</h4>
+                                    <p>28 sales</p>
+                                </div>
+                                <span class="product-revenue">$504</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>New order</strong> received from Sarah Johnson</p>
+                                    <span class="activity-time">2 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Product updated:</strong> Satin Lipstick</p>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>New customer</strong> registered: Emily Davis</p>
+                                    <span class="activity-time">3 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Order shipped:</strong> #ORD-2024-003</p>
+                                    <span class="activity-time">5 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

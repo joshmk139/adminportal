@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Settings | All things girlie Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="IMG_2357.PNG" alt="All things girlie">
+                <span class="logo-text">Admin Portal</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Orders</span>
+                <span class="badge">12</span>
+            </a>
+            <a href="customers.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <i class="fas fa-warehouse"></i>
+                <span>Inventory</span>
+            </a>
+            <a href="settings.html" class="nav-item active">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Ekpo Glory Mkpanam</span>
+                    <span class="user-role">CEO</span>
+                </div>
+            </div>
+            <a href="#" id="mainSiteLink" class="main-site-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Visit Main Site</span>
+            </a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Settings</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="btn btn-primary" id="saveSettingsBtn">
+                    <i class="fas fa-save"></i>
+                    <span>Save Changes</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Settings Tabs -->
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="general">General</button>
+                <button class="tab-btn" data-tab="payment">Payment</button>
+                <button class="tab-btn" data-tab="shipping">Shipping</button>
+                <button class="tab-btn" data-tab="email">Email</button>
+                <button class="tab-btn" data-tab="security">Security</button>
+            </div>
+
+            <!-- General Settings -->
+            <div class="settings-content active" id="general-tab">
+                <div class="settings-card">
+                    <h2>Store Information</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Store Name *</label>
+                            <input type="text" class="form-control" value="All things girlie" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Store Tagline</label>
+                            <input type="text" class="form-control" value="Soft beauty, made for you">
+                        </div>
+                        <div class="form-group">
+                            <label>Store Description</label>
+                            <textarea class="form-control" rows="4">Discover our carefully curated collection of lip products and personalized beauty experiences. Each piece is chosen with intention, designed to celebrate your natural beauty and feminine essence.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Store Logo</label>
+                            <div class="image-upload">
+                                <img src="IMG_2357.PNG" alt="Store Logo" class="preview-image">
+                                <input type="file" id="storeLogo" accept="image/*" class="file-input">
+                                <label for="storeLogo" class="file-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Change Logo</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Main Site URL *</label>
+                            <input type="url" id="mainSiteUrl" class="form-control" placeholder="https://www.allthingsgirlie.com" required>
+                            <small class="form-help">The URL of your main website. This will be used for the "Visit Main Site" link in the sidebar.</small>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Contact Information</h2>
+                    <form class="settings-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" class="form-control" value="hello@allthingsgirlie.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone *</label>
+                                <input type="tel" class="form-control" value="+1 (555) 123-4567" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter store address"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="City">
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input type="text" class="form-control" placeholder="Country">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Social Media</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Instagram URL</label>
+                            <input type="url" class="form-control" value="https://instagram.com/allthingsgirlie" placeholder="https://instagram.com/yourhandle">
+                        </div>
+                        <div class="form-group">
+                            <label>TikTok URL</label>
+                            <input type="url" class="form-control" value="https://tiktok.com/@allthingsgirlie" placeholder="https://tiktok.com/@yourhandle">
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook URL</label>
+                            <input type="url" class="form-control" placeholder="https://facebook.com/yourpage">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Payment Settings -->
+            <div class="settings-content" id="payment-tab">
+                <div class="settings-card">
+                    <h2>Payment Gateway</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Payment Provider *</label>
+                            <select class="form-control" required>
+                                <option selected>Paystack</option>
+                                <option>Stripe</option>
+                                <option>PayPal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Paystack Public Key *</label>
+                            <input type="text" class="form-control" placeholder="pk_test_..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Paystack Secret Key *</label>
+                            <input type="password" class="form-control" placeholder="sk_test_..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Currency *</label>
+                            <select class="form-control" required>
+                                <option value="USD" selected>USD - US Dollar</option>
+                                <option value="NGN">NGN - Nigerian Naira</option>
+                                <option value="GBP">GBP - British Pound</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Currency Conversion Rate (USD to NGN)</label>
+                            <input type="number" step="0.01" class="form-control" value="1450" placeholder="1450">
+                            <small class="form-help">Rate used for displaying prices in NGN</small>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Payment Methods</h2>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            <span>Credit/Debit Cards</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            <span>Bank Transfer</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            <span>Mobile Money</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            <span>Cash on Delivery</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Settings -->
+            <div class="settings-content" id="shipping-tab">
+                <div class="settings-card">
+                    <h2>Shipping Zones</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Default Shipping Rate (USD) *</label>
+                            <input type="number" step="0.01" class="form-control" value="5.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Free Shipping Threshold (USD)</label>
+                            <input type="number" step="0.01" class="form-control" value="100.00" placeholder="0.00">
+                            <small class="form-help">Orders above this amount qualify for free shipping</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Processing Time (Days)</label>
+                            <input type="number" class="form-control" value="1" min="0" required>
+                            <small class="form-help">Average time to process orders before shipping</small>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Shipping Methods</h2>
+                    <div class="shipping-methods">
+                        <div class="shipping-method">
+                            <div class="method-header">
+                                <h4>Standard Shipping</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-details">
+                                <p>5-7 business days</p>
+                                <p>$5.00</p>
+                            </div>
+                        </div>
+                        <div class="shipping-method">
+                            <div class="method-header">
+                                <h4>Express Shipping</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-details">
+                                <p>2-3 business days</p>
+                                <p>$15.00</p>
+                            </div>
+                        </div>
+                        <div class="shipping-method">
+                            <div class="method-header">
+                                <h4>Overnight Shipping</h4>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="method-details">
+                                <p>Next business day</p>
+                                <p>$25.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Settings -->
+            <div class="settings-content" id="email-tab">
+                <div class="settings-card">
+                    <h2>Email Configuration</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>SMTP Host</label>
+                            <input type="text" class="form-control" placeholder="smtp.gmail.com">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>SMTP Port</label>
+                                <input type="number" class="form-control" placeholder="587">
+                            </div>
+                            <div class="form-group">
+                                <label>Encryption</label>
+                                <select class="form-control">
+                                    <option>TLS</option>
+                                    <option>SSL</option>
+                                    <option>None</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="noreply@allthingsgirlie.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Enter email password">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Email Templates</h2>
+                    <div class="email-templates">
+                        <div class="template-item">
+                            <div>
+                                <h4>Order Confirmation</h4>
+                                <p>Sent when customer places an order</p>
+                            </div>
+                            <button class="btn btn-secondary">Edit</button>
+                        </div>
+                        <div class="template-item">
+                            <div>
+                                <h4>Shipping Notification</h4>
+                                <p>Sent when order is shipped</p>
+                            </div>
+                            <button class="btn btn-secondary">Edit</button>
+                        </div>
+                        <div class="template-item">
+                            <div>
+                                <h4>Order Delivered</h4>
+                                <p>Sent when order is delivered</p>
+                            </div>
+                            <button class="btn btn-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="settings-content" id="security-tab">
+                <div class="settings-card">
+                    <h2>Account Security</h2>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Current Password *</label>
+                            <input type="password" class="form-control" placeholder="Enter current password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-control" placeholder="Enter new password">
+                            <small class="form-help">Leave blank to keep current password</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" class="form-control" placeholder="Confirm new password">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Two-Factor Authentication</h2>
+                    <div class="security-option">
+                        <div>
+                            <h4>Enable 2FA</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Session Management</h2>
+                    <div class="sessions-list">
+                        <div class="session-item">
+                            <div>
+                                <strong>Current Session</strong>
+                                <p>Chrome on MacOS • Last active: Now</p>
+                            </div>
+                            <span class="session-badge active">Active</span>
+                        </div>
+                        <div class="session-item">
+                            <div>
+                                <strong>Safari on iPhone</strong>
+                                <p>Last active: 2 hours ago</p>
+                            </div>
+                            <button class="btn btn-sm btn-danger">Revoke</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
+

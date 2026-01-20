@@ -101,10 +101,10 @@
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-value">$12,450</h3>
+                        <h3 class="stat-value">$0</h3>
                         <p class="stat-label">Total Revenue</p>
-                        <span class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 12.5%
+                        <span class="stat-change neutral">
+                            <i class="fas fa-minus"></i> 0%
                         </span>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
                         <i class="fas fa-shopping-bag"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-value">156</h3>
+                        <h3 class="stat-value">0</h3>
                         <p class="stat-label">Total Orders</p>
-                        <span class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 8.2%
+                        <span class="stat-change neutral">
+                            <i class="fas fa-minus"></i> 0%
                         </span>
                     </div>
                 </div>
@@ -127,10 +127,10 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-value">342</h3>
+                        <h3 class="stat-value">0</h3>
                         <p class="stat-label">Customers</p>
-                        <span class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 5.1%
+                        <span class="stat-change neutral">
+                            <i class="fas fa-minus"></i> 0%
                         </span>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                         <i class="fas fa-box"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-value">7</h3>
+                        <h3 class="stat-value">0</h3>
                         <p class="stat-label">Products</p>
                         <span class="stat-change neutral">
                             <i class="fas fa-minus"></i> 0%
@@ -163,24 +163,12 @@
                         </select>
                     </div>
                     <div class="card-body">
-                        <div class="chart-placeholder">
-                            <div class="chart-bars">
-                                <div class="chart-bar" style="height: 60%"></div>
-                                <div class="chart-bar" style="height: 80%"></div>
-                                <div class="chart-bar" style="height: 45%"></div>
-                                <div class="chart-bar" style="height: 90%"></div>
-                                <div class="chart-bar" style="height: 70%"></div>
-                                <div class="chart-bar" style="height: 85%"></div>
-                                <div class="chart-bar" style="height: 75%"></div>
+                        <div class="chart-placeholder" id="revenueChart">
+                            <div class="chart-bars" id="chartBars">
+                                <!-- Chart bars will be generated dynamically -->
                             </div>
-                            <div class="chart-labels">
-                                <span>Mon</span>
-                                <span>Tue</span>
-                                <span>Wed</span>
-                                <span>Thu</span>
-                                <span>Fri</span>
-                                <span>Sat</span>
-                                <span>Sun</span>
+                            <div class="chart-labels" id="chartLabels">
+                                <!-- Chart labels will be generated dynamically -->
                             </div>
                         </div>
                     </div>
@@ -193,46 +181,11 @@
                         <a href="orders.html" class="view-all-link">View All</a>
                     </div>
                     <div class="card-body">
-                        <div class="orders-list">
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <span class="order-id">#ORD-2024-001</span>
-                                    <span class="order-customer">Sarah Johnson</span>
-                                </div>
-                                <div class="order-details">
-                                    <span class="order-amount">$64.00</span>
-                                    <span class="order-status status-pending">Pending</span>
-                                </div>
-                            </div>
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <span class="order-id">#ORD-2024-002</span>
-                                    <span class="order-customer">Emily Davis</span>
-                                </div>
-                                <div class="order-details">
-                                    <span class="order-amount">$28.00</span>
-                                    <span class="order-status status-processing">Processing</span>
-                                </div>
-                            </div>
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <span class="order-id">#ORD-2024-003</span>
-                                    <span class="order-customer">Jessica Martinez</span>
-                                </div>
-                                <div class="order-details">
-                                    <span class="order-amount">$90.00</span>
-                                    <span class="order-status status-shipped">Shipped</span>
-                                </div>
-                            </div>
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <span class="order-id">#ORD-2024-004</span>
-                                    <span class="order-customer">Amanda Wilson</span>
-                                </div>
-                                <div class="order-details">
-                                    <span class="order-amount">$46.00</span>
-                                    <span class="order-status status-delivered">Delivered</span>
-                                </div>
+                        <div class="orders-list" id="recentOrdersList">
+                            <!-- Recent orders will be loaded dynamically -->
+                            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                                <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                                <p>No orders yet</p>
                             </div>
                         </div>
                     </div>
@@ -247,38 +200,11 @@
                         <h2>Top Products</h2>
                     </div>
                     <div class="card-body">
-                        <div class="products-list">
-                            <div class="product-item">
-                                <img src="IMG_0538.JPG" alt="Satin Lipstick" class="product-thumb">
-                                <div class="product-info">
-                                    <h4>Satin Lipstick</h4>
-                                    <p>45 sales</p>
-                                </div>
-                                <span class="product-revenue">$1,440</span>
-                            </div>
-                            <div class="product-item">
-                                <img src="IMG_0537.JPG" alt="Nourishing Lip Oil" class="product-thumb">
-                                <div class="product-info">
-                                    <h4>Nourishing Lip Oil</h4>
-                                    <p>38 sales</p>
-                                </div>
-                                <span class="product-revenue">$1,064</span>
-                            </div>
-                            <div class="product-item">
-                                <img src="IMG_0540.JPG" alt="Matte Lipstick" class="product-thumb">
-                                <div class="product-info">
-                                    <h4>Matte Lipstick</h4>
-                                    <p>32 sales</p>
-                                </div>
-                                <span class="product-revenue">$960</span>
-                            </div>
-                            <div class="product-item">
-                                <img src="IMG_0539.JPG" alt="Hydrating Lip Balm" class="product-thumb">
-                                <div class="product-info">
-                                    <h4>Hydrating Lip Balm</h4>
-                                    <p>28 sales</p>
-                                </div>
-                                <span class="product-revenue">$504</span>
+                        <div class="products-list" id="topProductsList">
+                            <!-- Top products will be loaded dynamically -->
+                            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                                <i class="fas fa-box" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                                <p>No products yet</p>
                             </div>
                         </div>
                     </div>
@@ -290,42 +216,11 @@
                         <h2>Recent Activity</h2>
                     </div>
                     <div class="card-body">
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-shopping-bag"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>New order</strong> received from Sarah Johnson</p>
-                                    <span class="activity-time">2 minutes ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>Product updated:</strong> Satin Lipstick</p>
-                                    <span class="activity-time">1 hour ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-user-plus"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>New customer</strong> registered: Emily Davis</p>
-                                    <span class="activity-time">3 hours ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>Order shipped:</strong> #ORD-2024-003</p>
-                                    <span class="activity-time">5 hours ago</span>
-                                </div>
+                        <div class="activity-list" id="recentActivityList">
+                            <!-- Recent activity will be loaded dynamically -->
+                            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                                <i class="fas fa-history" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                                <p>No recent activity</p>
                             </div>
                         </div>
                     </div>

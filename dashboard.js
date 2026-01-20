@@ -22,19 +22,22 @@ async function loadDashboardData() {
     
     try {
         // Load statistics in parallel
-        const [revenueStats, orderStats, customerStats, productStats, recentOrders, topProducts] = await Promise.all([
+        const [revenueStats, orderStats, customerStats, productStats, recentOrders, topProducts, recentActivity] = await Promise.all([
             getRevenueStats(supabase),
             getOrderStats(supabase),
             getCustomerStats(supabase),
             getProductStats(supabase),
             getRecentOrders(supabase),
-            getTopProducts(supabase)
+            getTopProducts(supabase),
+            getRecentActivity(supabase)
         ]);
         
         // Update dashboard UI
         updateDashboardStats(revenueStats, orderStats, customerStats, productStats);
         updateRecentOrders(recentOrders);
         updateTopProducts(topProducts);
+        updateRecentActivity(recentActivity);
+        updateRevenueChart(revenueStats);
         
     } catch (err) {
         console.error('Error loading dashboard data:', err);
@@ -178,10 +181,20 @@ function updateDashboardStats(revenue, orders, customers, products) {
 
 // Update recent orders list
 function updateRecentOrders(orders) {
-    const ordersList = document.querySelector('.orders-list');
+    const ordersList = document.getElementById('recentOrdersList') || document.querySelector('.orders-list');
     if (!ordersList) return;
     
     ordersList.innerHTML = '';
+    
+    if (!orders || orders.length === 0) {
+        ordersList.innerHTML = `
+            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <p>No orders yet</p>
+            </div>
+        `;
+        return;
+    }
     
     orders.forEach(order => {
         const orderId = `#ORD-${order.id.substring(0, 8).toUpperCase()}`;
@@ -208,10 +221,20 @@ function updateRecentOrders(orders) {
 
 // Update top products list
 function updateTopProducts(products) {
-    const productsList = document.querySelector('.products-list');
+    const productsList = document.getElementById('topProductsList') || document.querySelector('.products-list');
     if (!productsList) return;
     
     productsList.innerHTML = '';
+    
+    if (!products || products.length === 0) {
+        productsList.innerHTML = `
+            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                <i class="fas fa-box" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <p>No products yet</p>
+            </div>
+        `;
+        return;
+    }
     
     products.forEach((product, index) => {
         const productItem = document.createElement('div');
@@ -229,5 +252,136 @@ function updateTopProducts(products) {
         `;
         
         productsList.appendChild(productItem);
+    });
+}
+
+// Load recent activity from activity_logs
+async function getRecentActivity(supabase) {
+    try {
+        const { data: activities, error } = await supabase
+            .from('activity_logs')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(4);
+        
+        if (error) throw error;
+        return activities || [];
+    } catch (err) {
+        console.error('Error loading activity:', err);
+        return [];
+    }
+}
+
+// Update recent activity list
+function updateRecentActivity(activities) {
+    const activityList = document.getElementById('recentActivityList') || document.querySelector('.activity-list');
+    if (!activityList) return;
+    
+    activityList.innerHTML = '';
+    
+    if (!activities || activities.length === 0) {
+        activityList.innerHTML = `
+            <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--text-medium);">
+                <i class="fas fa-history" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <p>No recent activity</p>
+            </div>
+        `;
+        return;
+    }
+    
+    activities.forEach(activity => {
+        const activityItem = document.createElement('div');
+        activityItem.className = 'activity-item';
+        
+        const iconMap = {
+            'product.created': 'fa-box',
+            'product.updated': 'fa-box',
+            'order.created': 'fa-shopping-bag',
+            'order.updated': 'fa-shopping-bag',
+            'order.shipped': 'fa-truck',
+            'customer.created': 'fa-user-plus',
+            'settings.updated': 'fa-cog',
+            'inventory.updated': 'fa-warehouse'
+        };
+        
+        const icon = iconMap[activity.action] || 'fa-circle';
+        const timeAgo = getTimeAgo(activity.created_at);
+        
+        activityItem.innerHTML = `
+            <div class="activity-icon">
+                <i class="fas ${icon}"></i>
+            </div>
+            <div class="activity-content">
+                <p><strong>${formatActivityAction(activity.action)}</strong> ${formatActivityEntity(activity.entity, activity.metadata)}</p>
+                <span class="activity-time">${timeAgo}</span>
+            </div>
+        `;
+        
+        activityList.appendChild(activityItem);
+    });
+}
+
+// Format activity action
+function formatActivityAction(action) {
+    const actionMap = {
+        'product.created': 'Product created',
+        'product.updated': 'Product updated',
+        'order.created': 'New order',
+        'order.updated': 'Order updated',
+        'order.shipped': 'Order shipped',
+        'customer.created': 'New customer',
+        'settings.updated': 'Settings updated',
+        'inventory.updated': 'Inventory updated'
+    };
+    return actionMap[action] || action;
+}
+
+// Format activity entity
+function formatActivityEntity(entity, metadata) {
+    if (metadata && metadata.name) {
+        return metadata.name;
+    }
+    return entity;
+}
+
+// Get time ago string
+function getTimeAgo(dateString) {
+    const now = new Date();
+    const then = new Date(dateString);
+    const diffMs = now - then;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+}
+
+// Update revenue chart
+function updateRevenueChart(revenueStats) {
+    const chartBars = document.getElementById('chartBars');
+    const chartLabels = document.getElementById('chartLabels');
+    
+    if (!chartBars || !chartLabels) return;
+    
+    // For now, show placeholder bars
+    // In production, you'd fetch daily revenue data
+    chartBars.innerHTML = '';
+    chartLabels.innerHTML = '';
+    
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const heights = [60, 80, 45, 90, 70, 85, 75]; // Placeholder heights
+    
+    days.forEach((day, index) => {
+        const bar = document.createElement('div');
+        bar.className = 'chart-bar';
+        bar.style.height = `${heights[index]}%`;
+        chartBars.appendChild(bar);
+        
+        const label = document.createElement('span');
+        label.textContent = day;
+        chartLabels.appendChild(label);
     });
 }

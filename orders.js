@@ -38,8 +38,7 @@ async function loadOrders() {
                 customer_id,
                 customers (
                     id,
-                    email,
-                    full_name:profiles!inner(full_name)
+                    email
                 )
             `)
             .order('created_at', { ascending: false })

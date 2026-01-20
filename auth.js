@@ -1,6 +1,7 @@
 // Simple Supabase-based auth for admin portal
 
 let authSupabase = null;
+let currentUserProfile = null;
 
 document.addEventListener('DOMContentLoaded', async function () {
   authSupabase = initSupabase();
@@ -18,7 +19,14 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // On all other admin pages, require authentication
-  await requireAuth();
+  const isAuthenticated = await requireAuth();
+  if (!isAuthenticated) {
+    return; // Will redirect to login, so exit early
+  }
+  
+  // Load and display user profile
+  await loadUserProfile();
+  updateUserProfileDisplay();
   setupLogoutButton();
 });
 
@@ -35,11 +43,75 @@ async function requireAuth() {
     if (!session) {
       const redirectTo = window.location.pathname + window.location.search;
       window.location.href = `login.html?redirect=${encodeURIComponent(redirectTo)}`;
+      return false;
     }
+    return true;
   } catch (err) {
     console.error('Auth check failed', err);
     const redirectTo = window.location.pathname + window.location.search;
     window.location.href = `login.html?redirect=${encodeURIComponent(redirectTo)}`;
+    return false;
+  }
+}
+
+// Load user profile from Supabase profiles table
+async function loadUserProfile() {
+  try {
+    const { data: { user }, error: userError } = await authSupabase.auth.getUser();
+    
+    if (userError || !user) {
+      console.error('Error getting user', userError);
+      return;
+    }
+
+    // Fetch profile from profiles table
+    const { data: profile, error: profileError } = await authSupabase
+      .from('profiles')
+      .select('full_name, role')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError) {
+      console.error('Error fetching profile', profileError);
+      // Fallback to user email if profile not found
+      currentUserProfile = {
+        full_name: user.email?.split('@')[0] || 'User',
+        role: 'user'
+      };
+      return;
+    }
+
+    currentUserProfile = {
+      full_name: profile.full_name || user.email?.split('@')[0] || 'User',
+      role: profile.role || 'user'
+    };
+  } catch (err) {
+    console.error('Unexpected error loading profile', err);
+    currentUserProfile = {
+      full_name: 'User',
+      role: 'user'
+    };
+  }
+}
+
+// Update the sidebar user profile display
+function updateUserProfileDisplay() {
+  if (!currentUserProfile) return;
+
+  const userNameEl = document.querySelector('.user-name');
+  const userRoleEl = document.querySelector('.user-role');
+
+  if (userNameEl) {
+    userNameEl.textContent = currentUserProfile.full_name;
+  }
+
+  if (userRoleEl) {
+    // Format role for display (e.g., 'store_manager' -> 'Store Manager')
+    const roleDisplay = currentUserProfile.role
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    userRoleEl.textContent = roleDisplay;
   }
 }
 
@@ -74,6 +146,9 @@ function setupLoginPage() {
         showLoginError(error.message || 'Invalid email or password');
         return;
       }
+
+      // Load user profile after successful login
+      await loadUserProfile();
 
       // On success, redirect back to requested page or dashboard
       const params = new URLSearchParams(window.location.search);

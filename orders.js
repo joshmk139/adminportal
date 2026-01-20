@@ -156,12 +156,28 @@ function updateOrderStats(ordersData) {
     };
     
     // Update stat cards
-    document.querySelectorAll('.stat-value').forEach((stat, index) => {
-        const values = [stats.pending, stats.processing, stats.shipped, stats.delivered];
-        if (values[index] !== undefined) {
-            stat.textContent = values[index];
+    const statValues = document.querySelectorAll('.stat-value');
+    if (statValues.length >= 4) {
+        statValues[0].textContent = stats.pending;
+        statValues[1].textContent = stats.processing;
+        statValues[2].textContent = stats.shipped;
+        statValues[3].textContent = stats.delivered;
+    }
+    
+    // Update sidebar badge with pending orders count
+    const ordersBadge = document.getElementById('ordersBadge');
+    if (ordersBadge) {
+        const pendingCount = stats.pending;
+        if (pendingCount > 0) {
+            ordersBadge.textContent = pendingCount;
+            ordersBadge.style.display = 'inline-flex';
+        } else {
+            ordersBadge.style.display = 'none';
         }
-    });
+    }
+    
+    // Also update badge in other pages' sidebars
+    updateOrdersBadgeInAllPages(stats.pending);
 }
 
 // Setup status change handlers
@@ -323,4 +339,21 @@ function openModal(modalId) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+}
+
+// Update orders badge in all pages (for sidebar consistency)
+function updateOrdersBadgeInAllPages(count) {
+    // Update badge in current page
+    const currentBadge = document.getElementById('ordersBadge');
+    if (currentBadge) {
+        if (count > 0) {
+            currentBadge.textContent = count;
+            currentBadge.style.display = 'inline-flex';
+        } else {
+            currentBadge.style.display = 'none';
+        }
+    }
+    
+    // Store in localStorage so other pages can read it
+    localStorage.setItem('pendingOrdersCount', count);
 }

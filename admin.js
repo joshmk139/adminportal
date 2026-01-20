@@ -536,7 +536,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Load and update orders badge from localStorage
+    updateOrdersBadgeFromStorage();
+    
     console.log('Admin Portal initialized');
 });
+
+// Update orders badge from localStorage (set by orders.js)
+function updateOrdersBadgeFromStorage() {
+    const pendingCount = parseInt(localStorage.getItem('pendingOrdersCount') || '0', 10);
+    const ordersBadge = document.getElementById('ordersBadge');
+    
+    if (ordersBadge) {
+        if (pendingCount > 0) {
+            ordersBadge.textContent = pendingCount;
+            ordersBadge.style.display = 'inline-flex';
+        } else {
+            ordersBadge.style.display = 'none';
+        }
+    }
+    
+    // If on orders page, also fetch fresh count
+    if (window.location.pathname.includes('orders.html') || window.location.pathname.endsWith('/orders')) {
+        // orders.js will update it when it loads
+        return;
+    }
+    
+    // For other pages, try to get count from Supabase if available
+    const supabase = initSupabase();
+    if (supabase) {
+        supabase
+            .from('orders')
+            .select('id', { count: 'exact', head: true })
+            .eq('status', 'pending')
+            .then(({ count }) => {
+                if (count !== null) {
+                    const badge = document.getElementById('ordersBadge');
+                    if (badge) {
+                        if (count > 0) {
+                            badge.textContent = count;
+                            badge.style.display = 'inline-flex';
+                        } else {
+                            badge.style.display = 'none';
+                        }
+                        localStorage.setItem('pendingOrdersCount', count);
+                    }
+                }
+            })
+            .catch(err => {
+                // Silently fail - badge will just use localStorage value
+            });
+    }
+}
 
 
